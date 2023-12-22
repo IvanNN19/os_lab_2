@@ -83,27 +83,11 @@ int main(int argc, char* argv[]) {
         }
     }
 
-// Работа двух потоков одновременно
-    // if (Max == 2){
-    //     for(int i = 0; i < K; i++){
-    //         thread processing_thread_1(processing, ref(matrix), ref(convolution_Matrix), ref(rez_matrix), 0, ref(mtx), 2, A, B);
-    //         thread processing_thread_2(processing, ref(matrix), ref(convolution_Matrix), ref(rez_matrix), 1, ref(mtx), 2, A, B);
-
-    //         processing_thread_1.join();
-    //         processing_thread_2.join();
-    //         A = A + p - 1;
-    //         B = B + q - 1;
-    //         //rez_matrix.resize(rows-p-1, vector<double>(cols-q-1));
-    //         cout << i << ' ' << A << ' ' <<  B << endl;
-    //         print(matrix);
-
-    //     }
-    // }
-
     if (Max > 1){
         for(int i = 0; i < K; i++){
             for(int t = 0; t < Max; t++){
                 th[t] = thread(processing, ref(matrix), ref(convolution_Matrix), ref(rez_matrix), t, ref(mtx), Max, A, B);
+                cout << "ID потока: " << th[t].get_id() << "\n";
             }
             for(int t = 0; t < Max; t++){
                 th[t].join();
